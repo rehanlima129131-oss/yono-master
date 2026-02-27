@@ -1,48 +1,284 @@
-/* style.css */
+/* --- Core Reset and Variables --- */
 :root {
-    --primary-green: #388e3c;
-    --button-green: #4caf50;
-    --bg-color: #f5f5f5;
-    --text-dark: #333;
+    --primary-green: #006600; /* Deep forest green */
+    --light-green: #4CAF50;
+    --orange: #E65100;
+    --text-color: #333;
+    --bg-color: #f9f9f9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
+    color: var(--text-color);
     background-color: var(--bg-color);
-    color: var(--text-dark);
-    max-width: 600px; /* Perfect for mobile screens */
+    line-height: 1.6;
+    max-width: 600px; /* Force mobile-view on desktop for easier testing */
     margin: 0 auto;
-    background: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.top-bar { background-color: var(--primary-green); color: white; text-align: center; padding: 8px; font-size: 14px; font-weight: bold; }
-.main-banner img { width: 100%; height: auto; display: block; }
+img {
+    max-width: 100%;
+    height: auto;
+}
 
-.featured-section { display: flex; justify-content: space-around; padding: 15px 10px; background: #fff; border-bottom: 2px solid #eee; }
-.featured-app { text-align: center; width: 30%; }
-.featured-app img { width: 100%; max-width: 80px; border-radius: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-.featured-app h4 { margin: 8px 0; font-size: 12px; color: #555; }
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
-.btn-download-large { background: linear-gradient(180deg, #66bb6a, #388e3c); color: white; border: none; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; text-decoration: none; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+/* --- Header & Banner --- */
+.top-banner {
+    background-color: var(--primary-green);
+    color: white;
+    padding: 2rem 1rem;
+    position: relative;
+    overflow: hidden;
+}
 
-.telegram-strip { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background-color: #f8f9fa; border-bottom: 1px solid #ddd; }
-.telegram-strip span { color: #0088cc; font-weight: bold; font-size: 14px; }
-.btn-join { background: #0088cc; color: white; padding: 5px 15px; border-radius: 5px; text-decoration: none; font-size: 14px; }
+.banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-.game-list { padding: 0; margin: 0; background: white; }
-.game-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; border-bottom: 1px solid #f0f0f0; }
-.game-left { display: flex; align-items: center; gap: 12px; }
-.game-icon { width: 50px; height: 50px; border-radius: 10px; }
-.game-details h3 { margin: 0 0 2px 0; font-size: 15px; color: #000; }
-.game-details .bonus { color: #d32f2f; font-size: 12px; font-weight: bold; margin: 0; }
-.game-details .withdraw { color: #2e7d32; font-size: 11px; margin: 0; }
+.banner-text {
+    width: 65%;
+}
 
-.btn-download-small { background: var(--button-green); color: white; padding: 6px 15px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
+.banner-badge {
+    background-color: white;
+    color: var(--primary-green);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
 
-footer { background: #222; color: white; text-align: center; padding: 20px; font-size: 12px; }
-.footer-links { margin-bottom: 15px; }
-.footer-links a { color: #aaa; text-decoration: none; margin: 0 5px; }
-#loading { text-align: center; padding: 20px; color: var(--primary-green); font-weight: bold; }
+.banner-text h1 {
+    font-size: 1.6rem;
+    margin: 0.8rem 0 0.5rem;
+    line-height: 1.2;
+}
+
+.banner-text p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.btn-install {
+    display: inline-block;
+    background: linear-gradient(180deg, #57bb57, #E65100);
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.banner-image {
+    width: 30%;
+    position: relative;
+}
+
+.banner-image img {
+    width: 100%;
+    transform: scale(1.3);
+    transform-origin: bottom center;
+}
+
+/* --- Featured Apps --- */
+.featured-apps-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem 1rem;
+    background: white;
+    margin-top: -1rem; /* Overlap effect */
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.featured-app-card {
+    width: 30%;
+    text-align: center;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: white;
+    transition: transform 0.2s;
+}
+
+.featured-app-card:hover {
+    transform: translateY(-5px);
+}
+
+.featured-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.featured-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.featured-detail {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+}
+
+.featured-btn {
+    display: inline-block;
+    background: linear-gradient(180deg, #57bb57, #E65100);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+/* --- Telegram Section --- */
+.telegram-section {
+    background: white;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.telegram-section p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+}
+
+.btn-telegram {
+    display: inline-block;
+    background-color: #0088cc;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* --- All Games Section --- */
+.all-games-section {
+    padding: 2rem 1rem;
+    background: white;
+}
+
+.all-games-heading {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.game-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.game-item-left {
+    display: flex;
+    align-items: center;
+    width: 70%;
+}
+
+.icon-container {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--primary-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--primary-green);
+    margin-right: 1rem;
+}
+
+.app-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.game-item-details .app-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.game-item-details .app-detail {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.btn-get {
+    display: inline-block;
+    background: linear-gradient(180deg, #57bb5green, #E65100);
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+/* --- Footer --- */
+.footer {
+    background-color: #222;
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.footer-strip {
+    background-color: var(--primary-green);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.social-icons {
+    margin-right: 2rem;
+}
+
+.social-icons a {
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+}
+
+.info-links a {
+    margin: 0 0.5rem;
+    opacity: 0.7;
+}
+
+.copyright {
+    opacity: 0.5;
+    font-size: 0.8rem;
+}
