@@ -1,0 +1,51 @@
+{
+  "featuredGames": [
+    {
+      "id": 1,
+      "name": "Yono Games",
+      "icon": "jaihoslots.png",
+      "tag": "NO.1",
+      "downloadLink": "https://your-link.com/app1"
+    },
+    {
+      "id": 2,
+      "name": "Yono Rummy",
+      "icon": "https://i.postimg.cc/yNkBxt7Z/logo-(5).png",
+      "tag": "HOT",
+      "downloadLink": "https://your-link.com/app2"
+    },
+    {
+      "id": 3,
+      "name": "Yono All Games",
+      "icon": "https://via.placeholder.com/80/9c27b0/ffffff?text=All",
+      "tag": "NEW",
+      "downloadLink": "https://your-link.com/app3"
+    }
+  ],
+  "gameList": [
+    {
+      "id": 101,
+      "name": "Joy Rummy",
+      "icon": "https://via.placeholder.com/50/4caf50/ffffff?text=JR",
+      "bonus": "₹51",
+      "minWithdraw": "₹100",
+      "downloadLink": "https://your-link.com/joy"
+    },
+    {
+      "id": 102,
+      "name": "Rummy Gold",
+      "icon": "https://via.placeholder.com/50/f44336/ffffff?text=RG",
+      "bonus": "₹41",
+      "minWithdraw": "₹100",
+      "downloadLink": "https://your-link.com/gold"
+    },
+    {
+      "id": 103,
+      "name": "Teen Patti Master",
+      "icon": "https://via.placeholder.com/50/2196f3/ffffff?text=TPM",
+      "bonus": "₹30",
+      "minWithdraw": "₹100",
+      "downloadLink": "https://your-link.com/master"
+    }
+  ]
+}
