@@ -1,52 +1,83 @@
-// app.js
-async function loadGames() {
+// --- Main Function to Initialize Website ---
+async function initializeWebsite() {
     try {
-        // Fetch the data from your "Admin Panel" file
+        // Fetch the data from your data.json file
         const response = await fetch('data.json');
         const data = await response.json();
-        
-        // 1. Load Featured Games (Top 3)
-        const featuredContainer = document.getElementById('featured-container');
-        featuredContainer.innerHTML = ''; // Clear container
-        
-        data.featuredGames.forEach(game => {
-            featuredContainer.innerHTML += `
-                <div class="featured-app">
-                    <img src="${game.icon}" alt="${game.name}">
-                    <h4>${game.name}</h4>
-                    <a href="${game.downloadLink}" class="btn-download-large" target="_blank">Download</a>
-                </div>
-            `;
-        });
 
-        // 2. Load List Games
-        const listContainer = document.getElementById('list-container');
-        document.getElementById('loading').style.display = 'none'; // Hide loading text
-        listContainer.innerHTML = ''; // Clear container
-        
-        data.gameList.forEach(game => {
-            listContainer.innerHTML += `
-                <div class="game-item">
-                    <div class="game-left">
-                        <img src="${game.icon}" class="game-icon" alt="${game.name}">
-                        <div class="game-details">
-                            <h3>${game.name}</h3>
-                            <p class="bonus">Sign Up Bonus ${game.bonus}</p>
-                            <p class="withdraw">Min Withdraw ${game.minWithdraw}</p>
-                        </div>
-                    </div>
-                    <a href="${game.downloadLink}" class="btn-download-small" target="_blank">
-                        <i class="fas fa-download"></i> Get
-                    </a>
-                </div>
-            `;
-        });
+        // Pass the data to populate functions
+        populateFeaturedApps(data.featuredApps);
+        populateGameList(data.gameList);
 
     } catch (error) {
-        document.getElementById('loading').innerText = "Failed to load game data.";
-        console.error("Error loading JSON:", error);
+        console.error("Failed to fetch game data:", error);
     }
 }
 
-// Run the function when the website loads
-window.onload = loadGames;
+// --- Function to Populate Featured Apps ---
+function populateFeaturedApps(apps) {
+    const container = document.getElementById('featured-container');
+    container.innerHTML = ''; // Clear any existing content
+
+    apps.forEach(app => {
+        const card = createFeaturedAppCard(app);
+        container.appendChild(card);
+    });
+}
+
+// --- Helper to Create Featured App Card HTML ---
+function createFeaturedAppCard(app) {
+    const cardDiv = document.createElement('div');
+    cardDiv.className = 'featured-app-card';
+
+    // Build the inner HTML based on data.json
+    cardDiv.innerHTML = `
+        <div class="featured-icon">${app.icon}</div>
+        <p class="featured-title">${app.title}</p>
+        <p class="featured-detail">${app.detail}</p>
+        <a href="${app.link}" class="featured-btn">${app.buttonText}</a>
+    `;
+
+    return cardDiv;
+}
+
+// --- Function to Populate All Games List ---
+function populateGameList(apps) {
+    const container = document.getElementById('game-list');
+    container.innerHTML = ''; // Clear any existing content
+
+    apps.forEach((app, index) => {
+        // Create a unique placeholder ID for the first few items based on the image
+        const placeholderId = index < 6 ? String(index + 1) : '';
+        const listItem = createGameListItem(app, placeholderId);
+        container.appendChild(listItem);
+    });
+}
+
+// --- Helper to Create Game List Item HTML ---
+function createGameListItem(app, placeholderId) {
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'game-list-item';
+
+    // If a placeholder ID exists, show it in the icon container. Otherwise, show an image.
+    const iconHTML = placeholderId 
+        ? `<div class="icon-container">${placeholderId}</div>`
+        : `<div class="icon-container"><img src="${app.icon}" alt="${app.title} Icon" class="app-icon"></div>`;
+
+    // Build the inner HTML based on data.json
+    itemDiv.innerHTML = `
+        <div class="game-item-left">
+            ${iconHTML}
+            <div class="game-item-details">
+                <p class="app-name">${app.title}</p>
+                <p class="app-detail">${app.detail}</p>
+            </div>
+        </div>
+        <a href="${app.link}" class="btn-get">Get</a>
+    `;
+
+    return itemDiv;
+}
+
+// --- Run Website Initialization on Page Load ---
+window.onload = initializeWebsite;
